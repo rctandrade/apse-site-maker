@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Phone, Mail, Globe } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,17 +29,65 @@ const ContactSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Endereço",
+      content: "Rua Exemplo, 123 - Centro, Manaus - AM",
+    },
+    {
+      icon: Phone,
+      title: "Telefone",
+      content: "+55 (92) 99999-9999",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      content: "contato@apse.com.br",
+    },
+  ];
+
   return (
-    <section id="contato" className="py-16 md:py-20 bg-background">
+    <section id="contato" className="py-20 md:py-28 bg-primary">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact Form - Takes 3 columns */}
-          <div className="lg:col-span-3 animate-fade-in">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
+          {/* Left Column - Text & Contact Info */}
+          <div className="animate-fade-in">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
               Fale Conosco
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5">
+            <p className="text-primary-foreground/80 text-lg mb-10 leading-relaxed">
+              Entre em contato conosco para saber mais sobre como podemos ajudar
+              sua empresa a alcançar excelência em engenharia e segurança.
+            </p>
+
+            <div className="space-y-6">
+              {contactInfo.map((item, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-primary-foreground mb-1">
+                      {item.title}
+                    </h4>
+                    <p className="text-primary-foreground/80">{item.content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Form */}
+          <div
+            className="animate-slide-in-right"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="bg-card rounded-2xl p-8 lg:p-10 shadow-2xl"
+            >
+              <div className="space-y-5">
                 <div>
                   <label
                     htmlFor="nome"
@@ -52,9 +100,9 @@ const ContactSection = () => {
                     name="nome"
                     value={formData.nome}
                     onChange={handleChange}
-                    placeholder="Seu nome"
+                    placeholder="Seu nome completo"
                     required
-                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary"
+                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary h-12"
                   />
                 </div>
                 <div>
@@ -72,124 +120,52 @@ const ContactSection = () => {
                     onChange={handleChange}
                     placeholder="seu@email.com"
                     required
-                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary"
+                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary h-12"
                   />
                 </div>
-              </div>
-              <div>
-                <label
-                  htmlFor="assunto"
-                  className="block text-sm font-medium text-foreground mb-2"
+                <div>
+                  <label
+                    htmlFor="assunto"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    Assunto
+                  </label>
+                  <Input
+                    id="assunto"
+                    name="assunto"
+                    value={formData.assunto}
+                    onChange={handleChange}
+                    placeholder="Assunto da mensagem"
+                    required
+                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary h-12"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="mensagem"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    Mensagem
+                  </label>
+                  <Textarea
+                    id="mensagem"
+                    name="mensagem"
+                    value={formData.mensagem}
+                    onChange={handleChange}
+                    placeholder="Sua mensagem..."
+                    rows={5}
+                    required
+                    className="bg-muted/50 border-border focus:border-primary focus:ring-primary resize-none"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-6 text-lg shadow-lg hover:shadow-xl transition-all"
                 >
-                  Assunto
-                </label>
-                <Input
-                  id="assunto"
-                  name="assunto"
-                  value={formData.assunto}
-                  onChange={handleChange}
-                  placeholder="Assunto da mensagem"
-                  required
-                  className="bg-muted/50 border-border focus:border-primary focus:ring-primary"
-                />
+                  Enviar Mensagem
+                </Button>
               </div>
-              <div>
-                <label
-                  htmlFor="mensagem"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Mensagem
-                </label>
-                <Textarea
-                  id="mensagem"
-                  name="mensagem"
-                  value={formData.mensagem}
-                  onChange={handleChange}
-                  placeholder="Sua mensagem..."
-                  rows={5}
-                  required
-                  className="bg-muted/50 border-border focus:border-primary focus:ring-primary resize-none"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-10 py-6 text-base shadow-lg hover:shadow-xl transition-all"
-              >
-                Enviar
-              </Button>
             </form>
-          </div>
-
-          {/* Contact Info - Takes 2 columns */}
-          <div
-            className="lg:col-span-2 animate-slide-in-right"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <div className="bg-muted/30 rounded-2xl p-8 border border-border h-full">
-              <h3 className="font-heading text-xl font-bold text-foreground mb-6">
-                Informações de Contato
-              </h3>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Endereço
-                    </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Rua Exemplo, 123 - Centro
-                      <br />
-                      Manaus - AM, 69000-000
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Telefone
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      +55 (92) 99999-9999
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Email
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      contato@apse.com.br
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Globe className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Website
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      www.apse.com.br
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

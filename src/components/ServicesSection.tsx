@@ -7,21 +7,23 @@ import {
   ShieldCheck,
   Handshake,
   Presentation,
+  ArrowRight,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface ServiceCardProps {
   letter: string;
   title: string;
-  description: string;
-  icon: React.ReactNode;
+  summary: string;
+  Icon: LucideIcon;
   colorClass: "primary" | "secondary" | "accent";
 }
 
 const ServiceCard = ({
   letter,
   title,
-  description,
-  icon,
+  summary,
+  Icon,
   colorClass,
 }: ServiceCardProps) => {
   const bgColors = {
@@ -30,19 +32,29 @@ const ServiceCard = ({
     accent: "bg-accent",
   };
 
+  const iconColors = {
+    primary: "text-primary-foreground",
+    secondary: "text-secondary-foreground",
+    accent: "text-accent-foreground",
+  };
+
   return (
-    <div className="group p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <div className="group p-6 lg:p-8 bg-card rounded-xl border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
       <div
-        className={`w-14 h-14 rounded-xl ${bgColors[colorClass]} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+        className={`w-14 h-14 lg:w-16 lg:h-16 rounded-xl ${bgColors[colorClass]} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
       >
-        {icon}
+        <Icon className={`w-7 h-7 lg:w-8 lg:h-8 ${iconColors[colorClass]}`} />
       </div>
-      <h3 className="font-heading font-bold text-lg text-foreground mb-2">
+      <h3 className="font-heading font-bold text-lg lg:text-xl text-foreground mb-3">
         <span className="text-primary">{letter})</span> {title}
       </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {description}
+      <p className="text-muted-foreground leading-relaxed mb-4">
+        {summary}
       </p>
+      <span className="inline-flex items-center gap-2 text-accent font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        Saiba Mais
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </span>
     </div>
   );
 };
@@ -52,82 +64,74 @@ const ServicesSection = () => {
     {
       letter: "A",
       title: "Engenharia",
-      description:
-        "Gerenciamento e execução de projetos de engenharia com excelência técnica e compromisso com prazos.",
-      icon: <Settings className="w-7 h-7 text-primary-foreground" />,
+      summary: "Gestão completa de projetos e produção industrial.",
+      Icon: Settings,
       colorClass: "primary",
     },
     {
       letter: "B",
       title: "Consultoria em Gestão",
-      description:
-        "Otimização de processos empresariais e implementação de sistemas de gestão integrada.",
-      icon: <GitBranch className="w-7 h-7 text-secondary-foreground" />,
+      summary: "Otimização de processos e sistemas de gestão.",
+      Icon: GitBranch,
       colorClass: "secondary",
     },
     {
       letter: "C",
       title: "Perícia Técnica",
-      description:
-        "Inspeções técnicas, laudos periciais e relatórios especializados para suporte jurídico e técnico.",
-      icon: <Search className="w-7 h-7 text-primary-foreground" />,
+      summary: "Inspeções, laudos e relatórios especializados.",
+      Icon: Search,
       colorClass: "primary",
     },
     {
       letter: "D",
       title: "Testes e Análises",
-      description:
-        "Ensaios laboratoriais e análises de materiais com precisão e confiabilidade.",
-      icon: <FlaskConical className="w-7 h-7 text-accent-foreground" />,
+      summary: "Ensaios laboratoriais com precisão e confiabilidade.",
+      Icon: FlaskConical,
       colorClass: "accent",
     },
     {
       letter: "E",
-      title: "Comércio de Produtos Químicos",
-      description:
-        "Importação, exportação e distribuição de produtos químicos com segurança e conformidade.",
-      icon: <Drum className="w-7 h-7 text-primary-foreground" />,
+      title: "Produtos Químicos",
+      summary: "Importação e distribuição com segurança.",
+      Icon: Drum,
       colorClass: "primary",
     },
     {
       letter: "G",
       title: "Comércio de EPIs",
-      description:
-        "Fornecimento de equipamentos de proteção individual de alta qualidade para sua equipe.",
-      icon: <ShieldCheck className="w-7 h-7 text-secondary-foreground" />,
+      summary: "Equipamentos de proteção de alta qualidade.",
+      Icon: ShieldCheck,
       colorClass: "secondary",
     },
     {
       letter: "H",
       title: "Representação Comercial",
-      description:
-        "Representação de marcas e produtos nacionais e internacionais no mercado regional.",
-      icon: <Handshake className="w-7 h-7 text-primary-foreground" />,
+      summary: "Representação de marcas no mercado regional.",
+      Icon: Handshake,
       colorClass: "primary",
     },
     {
       letter: "I",
       title: "Treinamentos e Cursos",
-      description:
-        "Capacitação profissional e desenvolvimento de competências em segurança e engenharia.",
-      icon: <Presentation className="w-7 h-7 text-accent-foreground" />,
+      summary: "Capacitação em segurança e engenharia.",
+      Icon: Presentation,
       colorClass: "accent",
     },
   ];
 
   return (
-    <section id="servicos" className="py-16 md:py-20 bg-muted/30">
+    <section id="servicos" className="py-20 md:py-28 bg-muted/40">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             NOSSOS SERVIÇOS
           </h2>
-          <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <div
               key={service.letter}

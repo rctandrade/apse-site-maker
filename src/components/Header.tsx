@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import apseLogo from "@/assets/apse-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Home", href: "#home", active: true },
-    { label: "Serviços", href: "#servicos", active: false },
-    { label: "Contato", href: "#contato", active: false },
+    { label: "Home", href: "#home" },
+    { label: "Serviços", href: "#servicos" },
   ];
+
+  const scrollToContact = () => {
+    document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
@@ -38,15 +43,17 @@ const Header = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className={`px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 ${
-                  link.active
-                    ? "bg-primary text-primary-foreground shadow-md hover:shadow-lg"
-                    : "text-foreground hover:bg-muted hover:text-primary"
-                }`}
+                className="px-5 py-2.5 rounded-lg font-medium text-sm text-foreground hover:bg-muted hover:text-primary transition-all duration-200"
               >
                 {link.label}
               </a>
             ))}
+            <Button
+              onClick={scrollToContact}
+              className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-2.5 shadow-md hover:shadow-lg transition-all"
+            >
+              Contato
+            </Button>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -72,15 +79,17 @@ const Header = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg font-medium text-sm transition-all ${
-                    link.active
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:bg-muted"
-                  }`}
+                  className="px-4 py-3 rounded-lg font-medium text-sm text-foreground hover:bg-muted transition-all"
                 >
                   {link.label}
                 </a>
               ))}
+              <Button
+                onClick={scrollToContact}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3"
+              >
+                Contato
+              </Button>
             </div>
           </nav>
         )}
