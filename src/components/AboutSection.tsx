@@ -1,52 +1,66 @@
-import { ArrowRight } from "lucide-react";
-import apseLogo from "@/assets/apse-logo.png";
+import teamEngineers from "@/assets/team-engineers.jpg";
 
 const AboutSection = () => {
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
-          {/* Text Content */}
-          <div className="animate-fade-in">
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-8">
-              Sobre a APSE
-            </h2>
-            <div className="space-y-5 text-muted-foreground text-lg leading-relaxed">
-              <p>
-                A <strong className="text-foreground">APSE - Amazon Process & Safety Engineering</strong> é
-                uma empresa especializada em soluções integradas de engenharia,
-                segurança do trabalho e consultoria empresarial.
-              </p>
-              <p>
-                Atuamos com excelência na região amazônica, oferecendo serviços
-                de alta qualidade que atendem às necessidades específicas de
-                cada cliente, sempre priorizando a segurança, a eficiência e o
-                desenvolvimento sustentável.
-              </p>
-              <p>
-                Nossa equipe é composta por profissionais altamente
-                qualificados, comprometidos em entregar resultados que superem
-                as expectativas.
-              </p>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+          {/* Image */}
+          <div className="animate-fade-in order-2 lg:order-1">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={teamEngineers}
+                alt="Equipe de engenheiros APSE"
+                className="w-full h-auto object-cover aspect-square"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 mt-8 text-primary font-semibold text-lg hover:gap-4 transition-all group"
-            >
-              Leia mais sobre nossa história
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
           </div>
 
-          {/* Logo Image */}
-          <div className="flex justify-center animate-slide-in-right">
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/5 rounded-3xl blur-3xl transform scale-110" />
-              <img
-                src={apseLogo}
-                alt="APSE Logo"
-                className="relative w-72 md:w-80 lg:w-96 h-auto object-contain drop-shadow-xl"
-              />
+          {/* Text Content */}
+          <div className="animate-slide-in-right order-1 lg:order-2">
+            <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+              Sobre a APSE
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-8">
+              A Força da Tripla Formação
+            </h2>
+            <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
+              <p>
+                Não entregamos apenas papéis. Nossa metodologia integra{" "}
+                <strong className="text-foreground">Química</strong>,{" "}
+                <strong className="text-foreground">Segurança do Trabalho</strong> e{" "}
+                <strong className="text-foreground">Engenharia de Produção</strong>.
+              </p>
+              <p>
+                Isso nos permite mitigar riscos regulatórios ao mesmo tempo que
+                aumentamos a eficiência do seu chão de fábrica.
+              </p>
+              <p className="font-medium text-foreground">
+                Atuamos com emissão de ART e responsabilidade técnica completa.
+              </p>
+            </div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-border">
+              <div>
+                <span className="block font-heading text-3xl md:text-4xl font-bold text-primary">
+                  15+
+                </span>
+                <span className="text-sm text-muted-foreground">Anos de Experiência</span>
+              </div>
+              <div>
+                <span className="block font-heading text-3xl md:text-4xl font-bold text-secondary">
+                  200+
+                </span>
+                <span className="text-sm text-muted-foreground">Projetos Entregues</span>
+              </div>
+              <div>
+                <span className="block font-heading text-3xl md:text-4xl font-bold text-accent">
+                  100%
+                </span>
+                <span className="text-sm text-muted-foreground">Conformidade NR</span>
+              </div>
             </div>
           </div>
         </div>
